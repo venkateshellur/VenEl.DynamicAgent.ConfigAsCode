@@ -1,0 +1,6 @@
+@VenEl.Agent.WebHost_HostAddress = http://localhost:5201
+
+GET {{VenEl.Agent.WebHost_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

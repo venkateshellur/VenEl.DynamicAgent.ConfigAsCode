@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VenEl.Agent.Core\VenEl.Agent.Core.csproj" />
+    <ProjectReference Include="..\VenEl.Agent.Infrastructure\VenEl.Agent.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\VenEl.Agent.Host\agents.yaml" Link="agents.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\VenEl.Agent.Host\workflows.yaml" Link="workflows.yaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

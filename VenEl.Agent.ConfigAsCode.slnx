@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="VenEl.Agent.Core/VenEl.Agent.Core.csproj" />
+  <Project Path="VenEl.Agent.Host/VenEl.Agent.Host.csproj" />
+  <Project Path="VenEl.Agent.WebHost/VenEl.Agent.WebHost.csproj" />
+</Solution>
