@@ -1,0 +1,32 @@
+name: Publish NuGet Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    # REQUIRED: Allow GitHub Actions to request an OIDC token to authenticate with NuGet.org
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 10.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore VenEl.Agent.ConfigAsCode.slnx
+
+    - name: Build and Pack
+      run: dotnet pack VenEl.Agent.Infrastructure/VenEl.Agent.Infrastructure.csproj -c Release
+
+    - name: Push to NuGet.org
+      run: dotnet nuget push VenEl.Agent.Infrastructure/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
