@@ -1,13 +1,41 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\VenEl.Agent.Core\VenEl.Agent.Core.csproj" />
-  </ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    
+    <!-- NuGet Package Properties -->
+    <PackageId>VenEl.Agent.ConfigAsCode</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Venkatesh Ellur</Authors>
+    <Description>A Config-As-Code engine for executing intelligent AI agents via YAML pipelines. Supports Google Gemini and Puter (OpenAI).</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/venkateshellur/VenEl.Agent.ConfigAsCode</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    
+    <!-- Bundle ProjectReferences inside the NuGet package -->
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- PrivateAssets="all" ensures NuGet does not list VenEl.Agent.Core as a remote dependency -->
+    <ProjectReference Include="..\VenEl.Agent.Core\VenEl.Agent.Core.csproj">
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <IncludeAssets>VenEl.Agent.Core.dll</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!-- This target grabs the compiled Core.dll and embeds it physically inside the nupkg lib/net10.0 folder -->
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
 
 </Project>
