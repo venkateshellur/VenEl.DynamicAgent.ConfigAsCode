@@ -12,7 +12,6 @@
     <Description>A Config-As-Code engine for executing intelligent AI agents via YAML pipelines. Supports Google Gemini and Puter (OpenAI).</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/venkateshellur/VenEl.Agent.ConfigAsCode</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     
     <!-- Bundle ProjectReferences inside the NuGet package -->
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
