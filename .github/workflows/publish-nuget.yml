@@ -29,4 +29,4 @@ jobs:
       run: dotnet pack VenEl.Agent.Infrastructure/VenEl.Agent.Infrastructure.csproj -c Release
 
     - name: Push to NuGet.org
-      run: dotnet nuget push VenEl.Agent.Infrastructure/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push VenEl.Agent.Infrastructure/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
