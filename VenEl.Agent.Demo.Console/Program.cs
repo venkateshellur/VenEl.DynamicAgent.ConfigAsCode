@@ -10,7 +10,7 @@ using VenEl.Agent.Core.Providers;
 using VenEl.Agent.Infrastructure.Clients;
 using VenEl.Agent.Infrastructure.Factories;
 
-namespace VenEl.Agent.Host;
+namespace VenEl.Agent.Demo.ConsoleApp;
 
 class Program
 {

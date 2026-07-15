@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\VenEl.Agent.Host\agents.yaml" Link="agents.yaml" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="..\VenEl.Agent.Host\workflows.yaml" Link="workflows.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\VenEl.Agent.Demo.Console\agents.yaml" Link="agents.yaml" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\VenEl.Agent.Demo.Console\workflows.yaml" Link="workflows.yaml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
