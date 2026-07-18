@@ -14,5 +14,5 @@ public interface IAgentFactory
     /// <param name="llmClient">The LLM client to be injected into the agent.</param>
     /// <param name="logger">The logger to be injected into the agent.</param>
     /// <returns>An instance implementing IAgent.</returns>
-    IAgent CreateAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger);
+    IAgent CreateAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger, System.Collections.Generic.IEnumerable<ITool>? tools = null);
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VenEl Agent Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -289,8 +290,35 @@
                 if (response.ok) {
                     if (workflowId === 'ui_generation_pipeline') {
                         output.innerHTML = data.output;
+                        output.style.whiteSpace = 'normal';
+                        output.style.fontFamily = 'inherit';
+                        output.style.color = 'inherit';
+                        
+                        // Execute scripts injected via innerHTML sequentially
+                        const scripts = Array.from(output.querySelectorAll('script'));
+                        const loadScript = (index) => {
+                            if (index >= scripts.length) return;
+                            const oldScript = scripts[index];
+                            const newScript = document.createElement('script');
+                            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                            
+                            if (oldScript.src) {
+                                // For external scripts, wait until they load before continuing
+                                newScript.onload = () => loadScript(index + 1);
+                                oldScript.parentNode.replaceChild(newScript, oldScript);
+                            } else {
+                                // For inline scripts, execute immediately then continue
+                                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                                oldScript.parentNode.replaceChild(newScript, oldScript);
+                                loadScript(index + 1);
+                            }
+                        };
+                        loadScript(0);
                     } else {
                         output.textContent = data.output;
+                        output.style.whiteSpace = 'pre-wrap';
+                        output.style.fontFamily = 'Courier New, Courier, monospace';
+                        output.style.color = '#e2e8f0';
                     }
                     status.textContent = 'Success';
                     status.className = 'status success';

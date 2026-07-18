@@ -14,17 +14,20 @@ public class SequentialWorkflowEngine : IWorkflowEngine
     private readonly ILlmClientFactory _llmClientFactory;
     private readonly IAgentFactory _agentFactory;
     private readonly IAgentLogger _logger;
+    private readonly IToolRegistry _toolRegistry;
 
     public SequentialWorkflowEngine(
         IConfigurationProvider configProvider, 
         ILlmClientFactory llmClientFactory,
         IAgentFactory agentFactory,
-        IAgentLogger logger)
+        IAgentLogger logger,
+        IToolRegistry toolRegistry)
     {
         _configProvider = configProvider;
         _llmClientFactory = llmClientFactory;
         _agentFactory = agentFactory;
         _logger = logger;
+        _toolRegistry = toolRegistry;
     }
 
     public async Task<string> ExecuteWorkflowAsync(string workflowId, string initialInput)
@@ -63,7 +66,9 @@ public class SequentialWorkflowEngine : IWorkflowEngine
             }
 
             var agentClient = _llmClientFactory.GetClient(agentConfig);
-            var agent = _agentFactory.CreateAgent(agentConfig, agentClient, _logger);
+            
+            var agentTools = _toolRegistry.GetTools(agentConfig.Tools);
+            var agent = _agentFactory.CreateAgent(agentConfig, agentClient, _logger, agentTools);
             
             var output = await agent.ExecuteAsync(resolvedInput);
             

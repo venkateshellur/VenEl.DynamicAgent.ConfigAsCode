@@ -13,15 +13,19 @@ public class GenerativeUIAgent : IAgent
     private const string UiPersonaSuffix = 
         "\n\nCRITICAL INSTRUCTION: You are a Generative UI Agent. " +
         "You MUST output valid, beautifully styled HTML (with inline styles or Tailwind CSS classes). " +
+        "NEVER output raw JSON data. If the user asks for a chart or graph, embed Chart.js via CDN and render it! " +
         "SAFETY CONSTRAINT [RenderOnly=True]: You are strictly a visual rendering engine. " +
-        "You MUST NOT include any <script> tags, <form> POST actions, or network calls. " +
+        "You MUST NOT include any <form> POST actions, or network calls (CDN script tags for UI libraries are allowed). " +
         "Do NOT output markdown formatting. Do NOT wrap your response in ```html. Return RAW HTML only.";
 
-    public GenerativeUIAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger)
+    private readonly IEnumerable<ITool>? _tools;
+
+    public GenerativeUIAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger, IEnumerable<ITool>? tools = null)
     {
         Config = config;
         _llmClient = llmClient;
         _logger = logger;
+        _tools = tools;
     }
 
     public async Task<string> ExecuteAsync(string input)
@@ -29,7 +33,7 @@ public class GenerativeUIAgent : IAgent
         await _logger.LogPromptAsync(Config.Id, $"[Generative UI Request] {input}");
         
         var specializedPersona = Config.Persona + UiPersonaSuffix;
-        var response = await _llmClient.GenerateTextAsync(Config.Model, specializedPersona, input);
+        var response = await _llmClient.GenerateTextAsync(Config.Model, specializedPersona, input, _tools);
         
         if (response.StartsWith("```html") || response.StartsWith("```"))
         {

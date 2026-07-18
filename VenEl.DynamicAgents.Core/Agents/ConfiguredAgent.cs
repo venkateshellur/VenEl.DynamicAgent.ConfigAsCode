@@ -10,19 +10,21 @@ public class ConfiguredAgent : IAgent
     private readonly ILlmClient _llmClient;
     private readonly IAgentLogger _logger;
 
-    public ConfiguredAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger)
+    private readonly IEnumerable<ITool>? _tools;
+
+    public ConfiguredAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger, IEnumerable<ITool>? tools = null)
     {
         Config = config;
         _llmClient = llmClient;
         _logger = logger;
+        _tools = tools;
     }
 
     public async Task<string> ExecuteAsync(string input)
     {
         await _logger.LogPromptAsync(Config.Id, input);
         
-        // In a real scenario, we'd loop for tools here.
-        var response = await _llmClient.GenerateTextAsync(Config.Model, Config.Persona, input);
+        var response = await _llmClient.GenerateTextAsync(Config.Model, Config.Persona, input, _tools);
         
         await _logger.LogResponseAsync(Config.Id, response, response.Length); // Fake token count
         return response;

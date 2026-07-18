@@ -21,7 +21,7 @@ public class OpenAiCompatibleClient : ILlmClient
         _baseUrl = baseUrl.TrimEnd('/');
     }
 
-    public async Task<string> GenerateTextAsync(string model, string systemPrompt, string userPrompt)
+    public async Task<string> GenerateTextAsync(string model, string systemPrompt, string userPrompt, System.Collections.Generic.IEnumerable<ITool>? tools = null)
     {
         var url = $"{_baseUrl}/chat/completions";
 

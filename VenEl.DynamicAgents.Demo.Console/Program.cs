@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VenEl.DynamicAgents.Core.Engine;
 using VenEl.DynamicAgents.Core.Interfaces;
@@ -20,6 +21,14 @@ class Program
 
         var services = new ServiceCollection();
         var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        
+        var config = new Microsoft.Extensions.Configuration.ConfigurationBuilder()
+            .SetBasePath(baseDir)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile("appsettings.Development.json", optional: true)
+            .AddEnvironmentVariables()
+            .Build();
+
         // Wire up Core Interfaces
         services.AddSingleton<IAgentLogger, ConsoleAgentLogger>();
         services.AddSingleton<HttpClient>();
@@ -32,7 +41,7 @@ class Program
             // Always register Mock Provider as fallback
             factory.RegisterProvider("mock", new MockLlmClient());
 
-            var apiKey = Environment.GetEnvironmentVariable("GEMINI_API_KEY");
+            var apiKey = config["ApiKeys:Gemini"] ?? Environment.GetEnvironmentVariable("GEMINI_API_KEY");
             if (!string.IsNullOrEmpty(apiKey))
             {
                 Console.WriteLine("Gemini API Key detected! Registering Google provider.");
@@ -43,7 +52,7 @@ class Program
                 Console.WriteLine("WARNING: GEMINI_API_KEY not found. Google agents will fallback to Mock.");
             }
 
-            var puterKey = Environment.GetEnvironmentVariable("PUTER_API_KEY");
+            var puterKey = config["ApiKeys:Puter"] ?? Environment.GetEnvironmentVariable("PUTER_API_KEY");
             if (!string.IsNullOrEmpty(puterKey))
             {
                 Console.WriteLine("Puter API Key detected! Registering Puter provider.");
@@ -57,14 +66,16 @@ class Program
             return factory;
         });
 
-        services.AddSingleton<IAgentFactory>(sp => 
-        {
-            var factory = new DefaultAgentFactory();
-            factory.RegisterAgentType("Standard", (cfg, client, logger) => new VenEl.DynamicAgents.Core.Agents.ConfiguredAgent(cfg, client, logger));
-            return factory;
-        });
+    services.AddSingleton<IAgentFactory>(sp => 
+    {
+        var factory = new DefaultAgentFactory();
+        factory.RegisterAgentType("Standard", (cfg, client, logger, tools) => new VenEl.DynamicAgents.Core.Agents.ConfiguredAgent(cfg, client, logger, tools));
+        return factory;
+    });
 
-        services.AddSingleton<IConfigurationProvider>(new LocalFileConfigurationProvider(
+    services.AddSingleton<IToolRegistry>(sp => new DefaultToolRegistry(new System.Collections.Generic.List<ITool>()));
+
+        services.AddSingleton<VenEl.DynamicAgents.Core.Interfaces.IConfigurationProvider>(new LocalFileConfigurationProvider(
             Path.Combine(baseDir, "agents.yaml"), 
             Path.Combine(baseDir, "workflows.yaml")));
         services.AddSingleton<IWorkflowEngine, SequentialWorkflowEngine>();

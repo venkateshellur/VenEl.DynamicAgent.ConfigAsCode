@@ -28,13 +28,13 @@ builder.Services.AddSingleton<ILlmClientFactory>(sp =>
 
     factory.RegisterProvider("mock", new MockLlmClient());
 
-    var apiKey = Environment.GetEnvironmentVariable("GEMINI_API_KEY");
+    var apiKey = builder.Configuration["ApiKeys:Gemini"] ?? Environment.GetEnvironmentVariable("GEMINI_API_KEY");
     if (!string.IsNullOrEmpty(apiKey))
     {
         factory.RegisterProvider("google", new GeminiLlmClient(httpClient, apiKey));
     }
 
-    var puterKey = Environment.GetEnvironmentVariable("PUTER_API_KEY");
+    var puterKey = builder.Configuration["ApiKeys:Puter"] ?? Environment.GetEnvironmentVariable("PUTER_API_KEY");
     if (!string.IsNullOrEmpty(puterKey))
     {
         factory.RegisterProvider("puter", new OpenAiCompatibleClient(httpClient, puterKey, "https://api.puter.com/puterai/openai/v1"));
@@ -48,10 +48,10 @@ builder.Services.AddSingleton<IAgentFactory>(sp =>
     var factory = new DefaultAgentFactory();
     
     // Register the standard console agent for backend tasks
-    factory.RegisterAgentType("Standard", (cfg, client, logger) => new VenEl.DynamicAgents.Core.Agents.ConfiguredAgent(cfg, client, logger));
+    factory.RegisterAgentType("Standard", (cfg, client, logger, tools) => new VenEl.DynamicAgents.Core.Agents.ConfiguredAgent(cfg, client, logger, tools));
     
     // Register the generative UI agent for frontend tasks
-    factory.RegisterAgentType("GenerativeUI", (cfg, client, logger) => new VenEl.DynamicAgents.GenerativeUI.GenerativeUIAgent(cfg, client, logger));
+    factory.RegisterAgentType("GenerativeUI", (cfg, client, logger, tools) => new VenEl.DynamicAgents.GenerativeUI.GenerativeUIAgent(cfg, client, logger, tools));
     
     return factory;
 });
@@ -60,6 +60,15 @@ var baseDir = AppDomain.CurrentDomain.BaseDirectory;
 builder.Services.AddSingleton<VenEl.DynamicAgents.Core.Interfaces.IConfigurationProvider>(new LocalFileConfigurationProvider(
     Path.Combine(baseDir, "agents.yaml"), 
     Path.Combine(baseDir, "workflows.yaml")));
+
+builder.Services.AddSingleton<IToolRegistry>(sp => 
+{
+    var tools = new System.Collections.Generic.List<ITool>
+    {
+        new VenEl.DynamicAgents.Demo.Web.Tools.FetchStockPriceTool()
+    };
+    return new DefaultToolRegistry(tools);
+});
     
 builder.Services.AddSingleton<IWorkflowEngine, SequentialWorkflowEngine>();
 

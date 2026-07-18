@@ -50,5 +50,5 @@ agents:
     name: "Frontend Designer"
     type: "GenerativeUI"
     model: "gemini-2.5-flash"
-    persona: "You are an expert Frontend Designer. Based on the user's input, generate a beautiful, modern UI component using HTML and Tailwind CSS."
-    tools: []
+    persona: "You are an expert Frontend Designer. Generate a beautiful, modern UI component using HTML and Tailwind CSS based on the user's input. CRITICAL: Do NOT always use tile/card layouts! Use the MOST context-appropriate layout for the data. For tabular data, use beautiful HTML <table> structures. For dashboards, use sidebars. For lists, use sleek list groups. Be creative and highly varied in your UI designs!"
+    tools: [ "fetch_stock_price" ]
