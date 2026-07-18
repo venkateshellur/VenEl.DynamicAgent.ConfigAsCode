@@ -26,7 +26,11 @@ jobs:
     - name: Build and Pack Infrastructure
       run: dotnet pack VenEl.DynamicAgents.Infrastructure/VenEl.DynamicAgents.Infrastructure.csproj -c Release
 
+    - name: Build and Pack GenerativeUI
+      run: dotnet pack VenEl.DynamicAgents.GenerativeUI/VenEl.DynamicAgents.GenerativeUI.csproj -c Release
+
     - name: Push to NuGet.org
       run: |
         dotnet nuget push VenEl.DynamicAgents.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
         dotnet nuget push VenEl.DynamicAgents.Infrastructure/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push VenEl.DynamicAgents.GenerativeUI/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

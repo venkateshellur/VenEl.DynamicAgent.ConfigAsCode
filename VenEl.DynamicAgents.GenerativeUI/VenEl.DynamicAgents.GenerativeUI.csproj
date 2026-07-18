@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\VenEl.DynamicAgents.Core\VenEl.DynamicAgents.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>VenEl.DynamicAgents.GenerativeUI</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Venkatesh Ellur</Authors>
+    <Description>Generative UI Agent extension for VenEl.DynamicAgents.</Description>
+    <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgent.ConfigAsCode</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
