@@ -1,8 +1,8 @@
-# VenEl.DynamicAgents.ConfigAsCode
+# VenEl.DynamicAgents
 
 The **VenEl Multi-Agent Config-As-Code Framework** is a powerful .NET engine that allows you to orchestrate intelligent AI agents directly from YAML configuration files. It completely separates your business logic (agent orchestration) from your application logic.
 
-💻 **Source Code:** [https://github.com/venkateshellur/VenEl.DynamicAgents.ConfigAsCode](https://github.com/venkateshellur/VenEl.DynamicAgents.ConfigAsCode)
+💻 **Source Code:** [https://github.com/venkateshellur/VenEl.DynamicAgents](https://github.com/venkateshellur/VenEl.DynamicAgents)
 
 ## Features
 - **Config-As-Code**: Define your agents and workflows in YAML, not C#.
@@ -14,7 +14,7 @@ The **VenEl Multi-Agent Config-As-Code Framework** is a powerful .NET engine tha
 
 ### 1. Install the Package
 ```bash
-dotnet add package VenEl.DynamicAgents.ConfigAsCode
+dotnet add package VenEl.DynamicAgents.Infrastructure
 ```
 
 ### 2. Configure Your Configuration Files

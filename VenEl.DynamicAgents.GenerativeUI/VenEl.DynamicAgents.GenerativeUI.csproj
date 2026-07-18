@@ -12,7 +12,7 @@
     <Version>1.0.0</Version>
     <Authors>Venkatesh Ellur</Authors>
     <Description>Generative UI Agent extension for VenEl.DynamicAgents.</Description>
-    <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgent.ConfigAsCode</RepositoryUrl>
+    <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgents</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
