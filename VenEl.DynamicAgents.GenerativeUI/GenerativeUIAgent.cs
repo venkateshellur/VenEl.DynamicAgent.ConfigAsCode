@@ -13,6 +13,8 @@ public class GenerativeUIAgent : IAgent
     private const string UiPersonaSuffix = 
         "\n\nCRITICAL INSTRUCTION: You are a Generative UI Agent. " +
         "You MUST output valid, beautifully styled HTML (with inline styles or Tailwind CSS classes). " +
+        "SAFETY CONSTRAINT [RenderOnly=True]: You are strictly a visual rendering engine. " +
+        "You MUST NOT include any <script> tags, <form> POST actions, or network calls. " +
         "Do NOT output markdown formatting. Do NOT wrap your response in ```html. Return RAW HTML only.";
 
     public GenerativeUIAgent(AgentConfig config, ILlmClient llmClient, IAgentLogger logger)
