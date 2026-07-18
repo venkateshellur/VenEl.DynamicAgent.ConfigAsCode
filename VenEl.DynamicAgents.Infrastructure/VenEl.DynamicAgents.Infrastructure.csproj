@@ -11,7 +11,7 @@
     <Authors>Venkatesh Ellur</Authors>
     <Description>Pre-built plugins and LLM clients (Gemini, OpenAI) for VenEl.DynamicAgents.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/venkateshellur/VenEl.Agent.ConfigAsCode</RepositoryUrl>
+    <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgent.ConfigAsCode</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

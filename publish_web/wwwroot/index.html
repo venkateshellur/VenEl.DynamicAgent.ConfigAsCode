@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VenEl Agent Studio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --primary-color: #3b82f6;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .control-panel {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select, textarea {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        button:disabled {
+            background-color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .output-panel {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .status {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background-color: var(--border-color);
+        }
+
+        .status.running {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .status.success {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .status.error {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .output-content {
+            flex-grow: 1;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            overflow-x: auto;
+        }
+
+        .loader {
+            display: none;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>VenEl Agent Studio (Demo)</h1>
+            <p class="subtitle">Config-As-Code Multi-Agent Workflow Execution Engine</p>
+        </header>
+
+        <div class="control-panel">
+            <div>
+                <label for="workflowId">Select Workflow</label>
+                <select id="workflowId" onchange="updateWorkflowInfo()">
+                    <option value="code_review_pipeline">Code Review Pipeline (Developer -> Architect)</option>
+                    <option value="travel_planner_pipeline">Travel Planner Pipeline (Agent -> Budget)</option>
+                    <option value="software_architecture_pipeline">Software Architecture Pipeline (PO -> Architect -> Security)</option>
+                </select>
+            </div>
+            
+            <div id="workflowInfo" style="padding: 1rem; background-color: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--primary-color); border-radius: 4px; font-size: 0.9rem;">
+                <!-- Info injected via JS -->
+            </div>
+
+            <div>
+                <label for="input">Initial Prompt</label>
+                <textarea id="input" placeholder="Enter your prompt here... e.g. 'Write a C# method to reverse a string'"></textarea>
+            </div>
+
+            <button id="runBtn" onclick="runWorkflow()">
+                <span id="btnText">Execute Workflow</span>
+                <div class="loader" id="loader"></div>
+            </button>
+        </div>
+
+        <div class="output-panel">
+            <div class="output-header">
+                <label>Final Output</label>
+                <span class="status" id="status">Idle</span>
+            </div>
+            <div class="output-content" id="output">Run a workflow to see the final agent's response here. Note: You can view real-time agent transitions in the console window where you started the server.</div>
+        </div>
+    </div>
+
+    <script>
+        const workflowData = {
+            "code_review_pipeline": `
+                <strong>developer_agent:</strong> Writes the initial code based on your prompt.<br>
+                <strong>reviewer_agent:</strong> Reviews the code for best practices, edge cases, and security vulnerabilities.
+            `,
+            "travel_planner_pipeline": `
+                <strong>travel_agent:</strong> Plans a detailed itinerary and suggests activities.<br>
+                <strong>budget_agent:</strong> Reviews the itinerary to provide cost estimates and cheaper alternatives.
+            `,
+            "software_architecture_pipeline": `
+                <strong>requirements_agent:</strong> Translates vague feature requests into strict acceptance criteria.<br>
+                <strong>architect_agent:</strong> Designs the high-level system architecture and database schema.<br>
+                <strong>security_agent:</strong> Reviews the architecture for vulnerabilities and adds mitigations.
+            `
+        };
+
+        function updateWorkflowInfo() {
+            const workflowId = document.getElementById('workflowId').value;
+            const infoDiv = document.getElementById('workflowInfo');
+            infoDiv.innerHTML = workflowData[workflowId] || "Select a workflow to see agent responsibilities.";
+        }
+        
+        // Initialize on load
+        window.onload = updateWorkflowInfo;
+
+        async function runWorkflow() {
+            const workflowId = document.getElementById('workflowId').value;
+            const input = document.getElementById('input').value;
+            const btn = document.getElementById('runBtn');
+            const btnText = document.getElementById('btnText');
+            const loader = document.getElementById('loader');
+            const output = document.getElementById('output');
+            const status = document.getElementById('status');
+
+            if (!input.trim()) {
+                alert("Please enter a prompt.");
+                return;
+            }
+
+            // UI Loading state
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            loader.style.display = 'block';
+            output.textContent = 'Agents are thinking... Check your terminal for real-time logs.';
+            status.textContent = 'Running...';
+            status.className = 'status running';
+
+            try {
+                const response = await fetch('/api/workflow/execute', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ workflowId, input })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    output.textContent = data.output;
+                    status.textContent = 'Success';
+                    status.className = 'status success';
+                } else {
+                    output.textContent = data.error || 'Unknown error occurred.';
+                    status.textContent = 'Error';
+                    status.className = 'status error';
+                }
+            } catch (error) {
+                output.textContent = error.message;
+                status.textContent = 'Error';
+                status.className = 'status error';
+            } finally {
+                // UI Restore state
+                btn.disabled = false;
+                btnText.style.display = 'block';
+                loader.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

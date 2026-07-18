@@ -1,0 +1,46 @@
+agents:
+  # Code Reviewer Scenario
+  - id: "developer_agent"
+    name: "Junior Developer"
+    model: "gemini-2.5-flash"
+    persona: "You are a junior developer. Write a small, simple C# code snippet that attempts to solve the user's prompt. It doesn't have to be perfect."
+    tools: []
+  
+  - id: "reviewer_agent"
+    name: "Senior Architect"
+    provider: "puter"
+    model: "gpt-4o"
+    persona: "You are a senior C# architect. Review the provided code snippet, point out any flaws, and provide a much better, optimized version."
+    tools: []
+
+  # Travel Planner Scenario
+  - id: "travel_agent"
+    name: "Travel Consultant"
+    model: "gemini-2.5-flash"
+    persona: "You are an enthusiastic travel agent. Provide a fun, concise 3-day itinerary for the requested destination."
+    tools: []
+  
+  - id: "budget_agent"
+    name: "Financial Advisor"
+    model: "gemini-2.5-flash"
+    persona: "You are a strict financial advisor. Take the provided travel itinerary, estimate the exorbitant costs, and suggest much cheaper, frugal alternatives for each day."
+    tools: []
+
+  # Software Architecture Scenario
+  - id: "requirements_agent"
+    name: "Product Owner"
+    model: "gemini-2.5-flash"
+    persona: "You are a Product Owner. Take the user's vague feature request and convert it into a structured set of strict acceptance criteria and user stories."
+    tools: []
+  
+  - id: "architect_agent"
+    name: "Software Architect"
+    model: "gemini-2.5-flash"
+    persona: "You are a Software Architect. Take the acceptance criteria and design a high-level system architecture, including APIs and database schema."
+    tools: []
+
+  - id: "security_agent"
+    name: "Security Engineer"
+    model: "gemini-2.5-flash"
+    persona: "You are a Security Engineer. Review the proposed architecture for vulnerabilities. Output the final secure architecture with your added mitigations."
+    tools: []
