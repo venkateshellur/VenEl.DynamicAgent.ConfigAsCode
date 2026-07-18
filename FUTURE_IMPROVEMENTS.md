@@ -1,6 +1,6 @@
 # Future Improvements & Roadmap
 
-This document tracks the current limitations of the **VenEl.Agent.ConfigAsCode** MVP and outlines the planned roadmap for future enhancements.
+This document tracks the current limitations of the **VenEl.DynamicAgents.ConfigAsCode** MVP and outlines the planned roadmap for future enhancements.
 
 ## 1. Tool Calling (Function Calling)
 *   **Current State:** Agents are restricted to text-based analysis and generation. They cannot interact with external systems.

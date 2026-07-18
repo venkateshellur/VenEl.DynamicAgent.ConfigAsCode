@@ -1,6 +1,6 @@
 # LLM Provider Configuration
 
-VenEl.Agent supports a **Hybrid Routing System** ("Implicit by default, Explicit fallback") to map your agents to the correct underlying LLM API provider.
+VenEl.DynamicAgents supports a **Hybrid Routing System** ("Implicit by default, Explicit fallback") to map your agents to the correct underlying LLM API provider.
 
 ## 1. Implicit Routing (Convention over Configuration)
 

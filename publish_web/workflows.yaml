@@ -1,0 +1,37 @@
+workflows:
+  - id: "code_review_pipeline"
+    type: "sequential"
+    steps:
+      - agent_id: "developer_agent"
+        input: "{previous_output}"
+        output_key: "code_snippet"
+      
+      - agent_id: "reviewer_agent"
+        input: "Here is the code to review:\n\n{code_snippet}"
+        output_key: "review_feedback"
+
+  - id: "travel_planner_pipeline"
+    type: "sequential"
+    steps:
+      - agent_id: "travel_agent"
+        input: "Plan a trip to: {previous_output}"
+        output_key: "itinerary"
+      
+      - agent_id: "budget_agent"
+        input: "Here is the proposed itinerary. Please cost it out and suggest cheap alternatives:\n\n{itinerary}"
+        output_key: "budget_plan"
+
+  - id: "software_architecture_pipeline"
+    type: "sequential"
+    steps:
+      - agent_id: "requirements_agent"
+        input: "{previous_output}"
+        output_key: "requirements"
+      
+      - agent_id: "architect_agent"
+        input: "Here are the requirements. Please design the architecture:\n\n{requirements}"
+        output_key: "architecture"
+
+      - agent_id: "security_agent"
+        input: "Here is the proposed architecture. Please review for security flaws and output a hardened design:\n\n{architecture}"
+        output_key: "secure_design"

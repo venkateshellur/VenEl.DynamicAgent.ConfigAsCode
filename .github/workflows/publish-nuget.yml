@@ -1,4 +1,4 @@
-name: Publish NuGet Package
+name: Publish NuGet Packages
 
 on:
   release:
@@ -8,11 +8,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     
-    # REQUIRED: Allow GitHub Actions to request an OIDC token to authenticate with NuGet.org
-    permissions:
-      id-token: write
-      contents: read
-
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
@@ -23,10 +18,15 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore VenEl.Agent.ConfigAsCode.slnx
+      run: dotnet restore VenEl.DynamicAgents.slnx
 
-    - name: Build and Pack
-      run: dotnet pack VenEl.Agent.Infrastructure/VenEl.Agent.Infrastructure.csproj -c Release
+    - name: Build and Pack Core
+      run: dotnet pack VenEl.DynamicAgents.Core/VenEl.DynamicAgents.Core.csproj -c Release
+
+    - name: Build and Pack Infrastructure
+      run: dotnet pack VenEl.DynamicAgents.Infrastructure/VenEl.DynamicAgents.Infrastructure.csproj -c Release
 
     - name: Push to NuGet.org
-      run: dotnet nuget push VenEl.Agent.Infrastructure/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: |
+        dotnet nuget push VenEl.DynamicAgents.Core/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push VenEl.DynamicAgents.Infrastructure/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

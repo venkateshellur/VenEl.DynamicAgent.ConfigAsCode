@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="VenEl.Agent.Core/VenEl.Agent.Core.csproj" />
-  <Project Path="VenEl.Agent.Demo.Console/VenEl.Agent.Demo.Console.csproj" />
-  <Project Path="VenEl.Agent.Demo.Web/VenEl.Agent.Demo.Web.csproj" />
-</Solution>

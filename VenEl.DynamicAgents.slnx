@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="VenEl.DynamicAgents.Core/VenEl.DynamicAgents.Core.csproj" />
+  <Project Path="VenEl.DynamicAgents.Infrastructure/VenEl.DynamicAgents.Infrastructure.csproj" />
+  <Project Path="VenEl.DynamicAgents.Demo.Console/VenEl.DynamicAgents.Demo.Console.csproj" />
+  <Project Path="VenEl.DynamicAgents.Demo.Web/VenEl.DynamicAgents.Demo.Web.csproj" />
+</Solution>
