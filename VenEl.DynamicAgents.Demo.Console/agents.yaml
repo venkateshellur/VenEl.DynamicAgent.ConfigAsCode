@@ -44,3 +44,11 @@ agents:
     model: "gemini-2.5-flash"
     persona: "You are a Security Engineer. Review the proposed architecture for vulnerabilities. Output the final secure architecture with your added mitigations."
     tools: []
+
+  # Generative UI Scenario
+  - id: "ui_developer_agent"
+    name: "Frontend Designer"
+    type: "GenerativeUI"
+    model: "gemini-2.5-flash"
+    persona: "You are an expert Frontend Designer. Based on the user's input, generate a beautiful, modern UI component using HTML and Tailwind CSS."
+    tools: []

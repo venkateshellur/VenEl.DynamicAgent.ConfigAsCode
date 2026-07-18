@@ -43,6 +43,19 @@ builder.Services.AddSingleton<ILlmClientFactory>(sp =>
     return factory;
 });
 
+builder.Services.AddSingleton<IAgentFactory>(sp => 
+{
+    var factory = new DefaultAgentFactory();
+    
+    // Register the standard console agent for backend tasks
+    factory.RegisterAgentType("Standard", (cfg, client, logger) => new VenEl.DynamicAgents.Core.Agents.ConfiguredAgent(cfg, client, logger));
+    
+    // Register the generative UI agent for frontend tasks
+    factory.RegisterAgentType("GenerativeUI", (cfg, client, logger) => new VenEl.DynamicAgents.GenerativeUI.GenerativeUIAgent(cfg, client, logger));
+    
+    return factory;
+});
+
 var baseDir = AppDomain.CurrentDomain.BaseDirectory;
 builder.Services.AddSingleton<VenEl.DynamicAgents.Core.Interfaces.IConfigurationProvider>(new LocalFileConfigurationProvider(
     Path.Combine(baseDir, "agents.yaml"), 

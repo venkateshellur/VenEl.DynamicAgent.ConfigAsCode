@@ -57,6 +57,13 @@ class Program
             return factory;
         });
 
+        services.AddSingleton<IAgentFactory>(sp => 
+        {
+            var factory = new DefaultAgentFactory();
+            factory.RegisterAgentType("Standard", (cfg, client, logger) => new VenEl.DynamicAgents.Core.Agents.ConfiguredAgent(cfg, client, logger));
+            return factory;
+        });
+
         services.AddSingleton<IConfigurationProvider>(new LocalFileConfigurationProvider(
             Path.Combine(baseDir, "agents.yaml"), 
             Path.Combine(baseDir, "workflows.yaml")));

@@ -198,6 +198,7 @@
                     <option value="code_review_pipeline">Code Review Pipeline (Developer -> Architect)</option>
                     <option value="travel_planner_pipeline">Travel Planner Pipeline (Agent -> Budget)</option>
                     <option value="software_architecture_pipeline">Software Architecture Pipeline (PO -> Architect -> Security)</option>
+                    <option value="ui_generation_pipeline">Generative UI Pipeline (Frontend Designer)</option>
                 </select>
             </div>
             
@@ -239,6 +240,9 @@
                 <strong>requirements_agent:</strong> Translates vague feature requests into strict acceptance criteria.<br>
                 <strong>architect_agent:</strong> Designs the high-level system architecture and database schema.<br>
                 <strong>security_agent:</strong> Reviews the architecture for vulnerabilities and adds mitigations.
+            `,
+            "ui_generation_pipeline": `
+                <strong>ui_developer_agent:</strong> Takes your idea and instantly generates beautiful, functional HTML/Tailwind markup (RenderOnly safe mode).
             `
         };
 
@@ -283,7 +287,11 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    output.textContent = data.output;
+                    if (workflowId === 'ui_generation_pipeline') {
+                        output.innerHTML = data.output;
+                    } else {
+                        output.textContent = data.output;
+                    }
                     status.textContent = 'Success';
                     status.className = 'status success';
                 } else {

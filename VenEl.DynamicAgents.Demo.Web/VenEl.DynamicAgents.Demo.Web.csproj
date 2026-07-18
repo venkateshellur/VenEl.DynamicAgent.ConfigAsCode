@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VenEl.DynamicAgents.Core\VenEl.DynamicAgents.Core.csproj" />
     <ProjectReference Include="..\VenEl.DynamicAgents.Infrastructure\VenEl.DynamicAgents.Infrastructure.csproj" />
+    <ProjectReference Include="..\VenEl.DynamicAgents.GenerativeUI\VenEl.DynamicAgents.GenerativeUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

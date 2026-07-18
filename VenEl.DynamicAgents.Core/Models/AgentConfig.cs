@@ -6,6 +6,7 @@ public class AgentConfig
 {
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
+    public string Type { get; set; } = "Standard";
     public string? Provider { get; set; }
     public string Model { get; set; } = string.Empty;
     public string Persona { get; set; } = string.Empty;

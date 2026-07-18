@@ -35,3 +35,10 @@ workflows:
       - agent_id: "security_agent"
         input: "Here is the proposed architecture. Please review for security flaws and output a hardened design:\n\n{architecture}"
         output_key: "secure_design"
+
+  - id: "ui_generation_pipeline"
+    type: "sequential"
+    steps:
+      - agent_id: "ui_developer_agent"
+        input: "Generate a UI based on this description:\n\n{previous_output}"
+        output_key: "html_ui"
