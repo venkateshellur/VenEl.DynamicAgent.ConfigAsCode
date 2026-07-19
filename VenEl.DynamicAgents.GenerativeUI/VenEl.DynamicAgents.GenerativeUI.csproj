@@ -8,6 +8,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
     <PackageId>VenEl.DynamicAgents.GenerativeUI</PackageId>
     <Version>1.0.4</Version>
     <Authors>Venkatesh Ellur</Authors>
