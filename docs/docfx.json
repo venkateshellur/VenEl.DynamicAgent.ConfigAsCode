@@ -1,20 +1,34 @@
 {
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "../VenEl.DynamicAgents.Core/VenEl.DynamicAgents.Core.csproj",
+            "../VenEl.DynamicAgents.Infrastructure/VenEl.DynamicAgents.Infrastructure.csproj",
+            "../VenEl.DynamicAgents.GenerativeUI/VenEl.DynamicAgents.GenerativeUI.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
   "build": {
     "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
       {
         "files": [
           "**/*.md",
           "**/*.yml"
         ],
         "exclude": [
-          "_site/**"
-        ]
-      },
-      {
-        "files": [
-          "../VenEl.DynamicAgents.Core/VenEl.DynamicAgents.Core.csproj",
-          "../VenEl.DynamicAgents.Infrastructure/VenEl.DynamicAgents.Infrastructure.csproj",
-          "../VenEl.DynamicAgents.GenerativeUI/VenEl.DynamicAgents.GenerativeUI.csproj"
+          "_site/**",
+          "api/**"
         ]
       }
     ],
