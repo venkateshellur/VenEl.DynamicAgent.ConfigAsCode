@@ -9,7 +9,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>VenEl.DynamicAgents.GenerativeUI</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Venkatesh Ellur</Authors>
     <Title>VenEl.DynamicAgents.ConfigAsCode - GenerativeUI</Title>
     <Description>Generative UI Agent extension for VenEl.DynamicAgents.</Description>
