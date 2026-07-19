@@ -7,7 +7,7 @@
     
     <!-- NuGet Package Properties -->
     <PackageId>VenEl.DynamicAgents.Infrastructure</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Venkatesh Ellur</Authors>
     <Title>VenEl.DynamicAgents.ConfigAsCode - Infrastructure</Title>
     <Description>Pre-built plugins and LLM clients (Gemini, OpenAI) for VenEl.DynamicAgents.</Description>
