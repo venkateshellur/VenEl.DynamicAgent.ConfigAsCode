@@ -7,6 +7,7 @@
     <PackageId>VenEl.DynamicAgents.Core</PackageId>
     <Version>1.0.0</Version>
     <Authors>Venkatesh Ellur</Authors>
+    <Title>VenEl.DynamicAgents.ConfigAsCode - Core</Title>
     <Description>Core abstractions, interfaces, and engine for VenEl.DynamicAgents.</Description>
     <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgents</RepositoryUrl>
   </PropertyGroup>

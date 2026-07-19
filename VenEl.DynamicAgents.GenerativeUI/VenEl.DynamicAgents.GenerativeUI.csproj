@@ -11,6 +11,7 @@
     <PackageId>VenEl.DynamicAgents.GenerativeUI</PackageId>
     <Version>1.0.0</Version>
     <Authors>Venkatesh Ellur</Authors>
+    <Title>VenEl.DynamicAgents.ConfigAsCode - GenerativeUI</Title>
     <Description>Generative UI Agent extension for VenEl.DynamicAgents.</Description>
     <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgents</RepositoryUrl>
   </PropertyGroup>
