@@ -10,6 +10,8 @@
     <Title>VenEl.DynamicAgents.ConfigAsCode - Core</Title>
     <Description>Core abstractions, interfaces, and engine for VenEl.DynamicAgents.</Description>
     <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgents</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

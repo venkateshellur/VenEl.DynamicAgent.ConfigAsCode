@@ -1,4 +1,7 @@
-# VenEl Dynamic Agents Framework
+# VenEl Multi-Agent Config-As-Code Framework
+
+📚 **Official Documentation:** [https://venkateshellur.github.io/VenEl.Agent.ConfigAsCode/](https://venkateshellur.github.io/VenEl.Agent.ConfigAsCode/)
+
 
 Welcome to the **VenEl Dynamic Agents Framework**! This is a modular, config-driven agent architecture in C# (.NET 10) that allows you to rapidly build, orchestrate, and deploy AI agents utilizing an intuitive "Config-as-Code" methodology.
 

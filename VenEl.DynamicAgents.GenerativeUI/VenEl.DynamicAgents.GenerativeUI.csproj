@@ -14,6 +14,8 @@
     <Title>VenEl.DynamicAgents.ConfigAsCode - GenerativeUI</Title>
     <Description>Generative UI Agent extension for VenEl.DynamicAgents.</Description>
     <RepositoryUrl>https://github.com/venkateshellur/VenEl.DynamicAgents</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
 </Project>

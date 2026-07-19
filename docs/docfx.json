@@ -1,0 +1,28 @@
+{
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.md",
+          "**/*.yml"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      },
+      {
+        "files": [
+          "../VenEl.DynamicAgents.Core/VenEl.DynamicAgents.Core.csproj",
+          "../VenEl.DynamicAgents.Infrastructure/VenEl.DynamicAgents.Infrastructure.csproj",
+          "../VenEl.DynamicAgents.GenerativeUI/VenEl.DynamicAgents.GenerativeUI.csproj"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "VenEl.DynamicAgents",
+      "_appFooter": "VenEl.DynamicAgents",
+      "_enableSearch": true
+    }
+  }
+}
