@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace VenEl.DynamicAgents.Core.Models;
 
+/// <summary>
+/// Represents a multi-agent workflow configuration containing sequential steps.
+/// </summary>
 public class WorkflowConfig
 {
     public string Id { get; set; } = string.Empty;

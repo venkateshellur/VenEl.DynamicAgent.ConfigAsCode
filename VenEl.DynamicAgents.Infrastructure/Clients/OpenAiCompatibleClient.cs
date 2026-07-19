@@ -8,7 +8,10 @@ using VenEl.DynamicAgents.Core.Interfaces;
 
 namespace VenEl.DynamicAgents.Infrastructure.Clients;
 
-public class OpenAiCompatibleClient : ILlmClient
+    /// <summary>
+    /// LLM Client implementation for OpenAI-compatible REST APIs.
+    /// </summary>
+    public class OpenAiCompatibleClient : ILlmClient
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;

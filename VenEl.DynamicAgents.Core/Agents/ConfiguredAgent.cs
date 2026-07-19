@@ -4,7 +4,10 @@ using VenEl.DynamicAgents.Core.Models;
 
 namespace VenEl.DynamicAgents.Core.Agents;
 
-public class ConfiguredAgent : IAgent
+    /// <summary>
+    /// The default runtime representation of an agent defined via configuration.
+    /// </summary>
+    public class ConfiguredAgent : IAgent
 {
     public AgentConfig Config { get; }
     private readonly ILlmClient _llmClient;

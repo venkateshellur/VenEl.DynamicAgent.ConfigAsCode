@@ -8,6 +8,9 @@ using VenEl.DynamicAgents.Core.Models;
 
 namespace VenEl.DynamicAgents.Core.Engine;
 
+/// <summary>
+/// A workflow engine that executes agents in a strict sequential order, passing outputs as inputs to subsequent agents.
+/// </summary>
 public class SequentialWorkflowEngine : IWorkflowEngine
 {
     private readonly IConfigurationProvider _configProvider;

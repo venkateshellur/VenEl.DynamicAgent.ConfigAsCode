@@ -10,6 +10,9 @@ using VenEl.DynamicAgents.Core.Interfaces;
 
 namespace VenEl.DynamicAgents.Infrastructure.Clients;
 
+/// <summary>
+/// LLM Client implementation for Google's Gemini API.
+/// </summary>
 public class GeminiLlmClient : ILlmClient
 {
     private readonly HttpClient _httpClient;

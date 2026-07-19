@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace VenEl.DynamicAgents.Core.Interfaces;
 
+/// <summary>
+/// Central registry for dynamically resolving and providing tools to agents.
+/// </summary>
 public interface IToolRegistry
 {
     /// <summary>

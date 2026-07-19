@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace VenEl.DynamicAgents.Core.Models;
 
+/// <summary>
+/// Represents the configuration of an AI agent, typically deserialized from YAML.
+/// </summary>
 public class AgentConfig
 {
     public string Id { get; set; } = string.Empty;
